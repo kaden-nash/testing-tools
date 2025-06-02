@@ -67,7 +67,7 @@ class CProgram(Program):
 
     def _get_executable_path(self):
         # if get_shell_type() == "powershell":
-        return self.path[:-2] + ".exe"
+        return self.path[:-len(self.extension)] + ".exe"
         # elif get_shell_type() == "bash":
         #     self.executable = self.name + ".out"
 
@@ -77,6 +77,29 @@ class CProgram(Program):
     def _get_compilation_command(self):
         return ["gcc", f"{self.path}", "-lm", "-o", f"{self.executable_path}"]
 
+class JavaProgram(Program):
+    """
+    Child of Program class that contains information about a Java program.
+
+    Attributes:
+        executable_path - absolute path to executable file
+        run_command - list of strings to be passed to subprocess.run to run Java program
+        compilation_command - list of strings be passed to subprocess.run to compile Java program
+    """
+    def __init__(self, file_path):
+        super().__init__(file_path)
+        self.executable_path = self._get_executable_path()
+        self.run_command = self._get_run_command()
+        self.compilation_command = self._get_compilation_command()
+    
+    def _get_executable_path(self):
+        return self.path[:-len(self.extension)] + ".class"
+    
+    def _get_run_command(self):
+        return ["java", f"{self.path}"]
+
+    def _get_compilation_command(self):
+        return ["javac", f"{self.path}"]
 
 class FileLines():
     """
@@ -221,6 +244,14 @@ class ProjectFile():
     def __init__(self):
         self._system_info = FileSystemInfo()
         self.path = self._get_valid_name()
+        self.type = self._get_file_type(Program(self.path))
+
+    def _get_file_type(self, file):
+        if file.extension == "c":
+            return CProgram(file.path)
+        
+        if file.extension == "java":
+            return JavaProgram(file.path)
 
     def _get_valid_name(self):
         """
@@ -286,7 +317,7 @@ class ProjectFile():
 
         # determine action based on number of potential matches
         match = None
-        if len(matches) == 1:
+        if len(matches) == 0:
             raise FileNotFoundError("The specified file could not be found. Please ensure you are in the right cwd.")
         elif len(matches) == 1:
             match = matches[0]
@@ -303,10 +334,10 @@ class ProjectFile():
         Takes user selection of correct file out of 10 possible found items.
 
         Input:
-            queue of matches
+            list of matches
 
         Output: 
-            index + 1 of place in queue that has the right filepath
+            index + 1 of place in list that has the right filepath
         """
 
         print("More than one file found.")
@@ -396,14 +427,16 @@ def create_test_files():
     
     print(f"{output_object.stdout}There we go!\n")
 
+
+
 def main():
     """
-    Driver code of script
+    Drives script
     """
 
     # program variables
-    c_file = ProjectFile()
-    program_info = CProgram(c_file.path)
+    project_file = ProjectFile()
+    program_info = project_file.type
     environment = FileSystemInfo()
 
     # testing variables
@@ -449,7 +482,7 @@ def main():
         
         # run code
         with open(in_file, "r") as in_filef:
-            output_object = subprocess.run(program_info.executable_path, stdin=in_filef, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+            output_object = subprocess.run(program_info.run_command, stdin=in_filef, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
         
         # handle runtime errors/warnings
         if output_object.returncode != 0:

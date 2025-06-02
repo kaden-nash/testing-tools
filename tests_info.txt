@@ -1,0 +1,20 @@
+INPUT
+afdaead
+4q4
+5737wrgs
+
+OUTPUT
+esafd
+e1351
+43146gs
+
+INPUT
+eadfeafde
+fileeaf
+e fileaf 
+a fa fea afdaeada fea ea
+OUTPUT
+eadfeadfeaf
+
+INPUT
+efadfeadfeadf
