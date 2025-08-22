@@ -9,7 +9,8 @@ public class Person {
     }
 
     public Person(String name, double rate) {
-        setInformation(name, rate);
+        this.name = name;
+        this.rate = rate;
     }
 
     // getters

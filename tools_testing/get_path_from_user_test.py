@@ -3,7 +3,9 @@ import pytest
 @pytest.mark.parametrize(
     "path, expected",
     [
-
+        (),
+        (),
+        ()
     ]
 )
 def test_get_path_from_user_test(path, expected):
