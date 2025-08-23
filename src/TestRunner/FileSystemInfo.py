@@ -11,11 +11,12 @@ class FileSystemInfo():
 
     """
     def __init__(self):
-        self.cwd = self._get_cwd()
-        self.tests_dir = self._get_tests_dir()
-
-    def _get_cwd(self):
+        pass
+    
+    @property
+    def cwd(self):
         return os.getcwd()
 
-    def _get_tests_dir(self):
+    @property
+    def tests_dir(self):
         return os.path.join(self.cwd, "tests")

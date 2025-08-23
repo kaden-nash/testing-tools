@@ -9,8 +9,8 @@ class JavaProgram(Program):
         run_command - list of strings to be passed to subprocess.run to run Java program
         compilation_command - list of strings be passed to subprocess.run to compile Java program
     """
-    def __init__(self, file_path):
-        super().__init__(file_path)
+    def __init__(self, file):
+        super().__init__(file)
     
     @property
     def executable_path(self):

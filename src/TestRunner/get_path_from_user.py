@@ -4,7 +4,7 @@ from src.TestRunner.file_search import file_search
 from src.TestRunner.FileFoundOverload import FileFoundOverload
 from src.TestRunner.FileSystemInfo import FileSystemInfo
 
-MAX_RESULTS = 10
+MAX_RESULTS = 9
 
 def get_path_from_user(env: FileSystemInfo):
     """
@@ -60,7 +60,7 @@ def _isolate_file(matches):
         raise FileNotFoundError("The specified file could not be found. Please ensure you are in the right cwd.")
     elif len(matches) == 1:
         match = matches[0]
-    elif len(matches) == MAX_RESULTS:
+    elif len(matches) == MAX_RESULTS + 1:
         raise FileFoundOverload("9+ files were found matching. Please ensure you are in the right cwd.")
     else:
         correctIndex = _get_user_match_selection(matches) - 1
@@ -106,7 +106,7 @@ def _get_user_index() -> int:
             continue
 
         # check for numbers outside range
-        if int(match_index) <= MAX_RESULTS and int(match_index) >= 1:
+        if int(match_index) <= MAX_RESULTS + 1 and int(match_index) >= 1:
             isValid = True
     
     return int(match_index)
