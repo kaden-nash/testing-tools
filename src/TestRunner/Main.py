@@ -1,7 +1,3 @@
-# FIXME: MAKE SURE YOU DON'T TURN THIS FILE INTO AN EXE WITHOUT MAKING A COPY!!
-# FIXME: DO THIS
-# FIXME: DON'T IGNORE TOP
-
 import os
 
 from src.TestRunner.ProgramFactory import ProgramFactory

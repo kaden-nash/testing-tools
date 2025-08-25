@@ -19,4 +19,4 @@ class FileSystemInfo():
 
     @property
     def tests_dir(self):
-        return os.path.join(self.cwd, "tests")
+        return os.path.join(self.cwd, "testing_files")

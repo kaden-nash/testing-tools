@@ -1,4 +1,5 @@
-
+// compile: C:\Users\kaden\Koofr\Coding2\testingtools\testing-tools\src\TestCreator\testCreator.cpp -o C:\Users\kaden\Koofr\Coding2\testingtools\testing-tools\src\TestCreator\testCreator.cpp
+// run: C:\Users\kaden\Koofr\Coding2\testingtools\testing-tools\src\TestCreator\testCreator.exe
 
 // TODO: Add functionality to include a "Pass" statement in the tests_info file if the user want to make a comment or something 
 
@@ -13,12 +14,12 @@ using namespace std;
 namespace fs = std::filesystem;
 
 fs::path createTestsDirectory(fs::path& currentPath) {
-    fs::path newDirectoryPath = currentPath / "tests"; 
+    fs::path newDirectoryPath = currentPath / "testing_files"; 
     fs::create_directory(newDirectoryPath);
     std::error_code ec;
     if (ec.value() != 0) {
         // cerr << "Error: " << ec.message() << " (Code: " << ec.value() << ")\n";
-        cerr << "Directory \"tests\" creation/opening failed." << endl;
+        cerr << "Directory \"testing_files\" creation/opening failed." << endl;
         exit(1);
     }
     return newDirectoryPath;
