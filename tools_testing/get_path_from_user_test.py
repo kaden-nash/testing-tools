@@ -1,17 +1,29 @@
 import pytest
 from src.TestRunner.get_path_from_user import get_path_from_user, _isolate_file, _get_user_match_selection
 import src.TestRunner.get_path_from_user
-from src.TestRunner.FileFoundOverload import FileFoundOverload
+
+matches_temp = [
+    "D:\\Testing-Tools\\testing-tools\\src\\TestRunner\\CProgram.py",
+    "D:\\Testing-Tools\\testing-tools\\src\\TestRunner\\file_search.py",
+    "D:\\Testing-Tools\\testing-tools\\src\\TestRunner\\FileFoundOverload.py",
+    "D:\\Testing-Tools\\testing-tools\\src\\TestRunner\\FileLines.py",
+    "D:\\Testing-Tools\\testing-tools\\src\\TestRunner\\FileName.py",
+    "D:\\Testing-Tools\\testing-tools\\src\\TestRunner\\FileSystemInfo.py",
+    "D:\\Testing-Tools\\testing-tools\\src\\TestRunner\\get_path_from_user.py",
+    "D:\\Testing-Tools\\testing-tools\\src\\TestRunner\\JavaProgram.py",
+    "D:\\Testing-Tools\\testing-tools\\src\\TestRunner\\Main.py",
+    "D:\\Testing-Tools\\testing-tools\\src\\TestRunner\\MainHelpers.py",
+]
 
 @pytest.mark.l1
 @pytest.mark.parametrize(
-    "mock_user_inputs, expected",
+    "mock_user_inputs, matches, expected",
     [
-        ([".py", "CProgram.py"], "D:\\Testing-Tools\\testing-tools\\src\\TestRunner\\CProgram.py"),
-        (["z", "CProgram.py"], "D:\\Testing-Tools\\testing-tools\\src\\TestRunner\\CProgram.py"),
+        ([".py", "CProgram.py"], [matches_temp, [matches_temp[0]]], "D:\\Testing-Tools\\testing-tools\\src\\TestRunner\\CProgram.py"),
+        (["z", "CProgram.py"], [[], [matches_temp[0]]], "D:\\Testing-Tools\\testing-tools\\src\\TestRunner\\CProgram.py"),
     ]
 )
-def test_get_path_from_user_test(mock_user_inputs, expected, get_matches, monkeypatch):
+def test_get_path_from_user(mock_user_inputs, matches, expected, monkeypatch):
     from src.TestRunner.FileSystemInfo import FileSystemInfo
     sysinfo = FileSystemInfo()
 
@@ -19,8 +31,9 @@ def test_get_path_from_user_test(mock_user_inputs, expected, get_matches, monkey
     def mock_user_input(prompt):
         return next(i)
 
-    def mock_potential_matches(cwd, matches):
-        return get_matches
+    j = iter(matches)
+    def mock_potential_matches(cwd, matches1):
+        return next(j)
 
     monkeypatch.setattr("builtins.input", mock_user_input)
     monkeypatch.setattr(src.TestRunner.get_path_from_user, "file_search", mock_potential_matches)

@@ -18,9 +18,11 @@ class CProgram(Program):
         return f"{self.path[:-len(self.extension)]}.exe"
         # elif get_shell_type() == "bash":
         #     self.executable = self.name + ".out"
+
     @property
     def run_command(self):
         return [f"{self.executable_path}"]
+        
     @property
     def compilation_command(self):
         return ["gcc", f"{self.path}", "-lm", "-o", f"{self.executable_path}"]

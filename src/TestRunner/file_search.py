@@ -1,5 +1,4 @@
 import os
-import subprocess
 
 def file_search(root_dir, searchTerm):
         """

@@ -41,23 +41,23 @@ class SummaryData:
         self.max_lines = 0
         self.i = 0
 
-def compile_project_file(program_info: Program):
+def compile_program(program: Program):
     # compile code (if necessary)
     print("Testing your code...")
-    output_object = subprocess.run(program_info.compilation_command, capture_output=True, text=True)
+    output_object = subprocess.run(program.compilation_command, capture_output=True, text=True)
 
     # handle compile errors
     if output_object.returncode != 0:
-        print(f"\nProblem compiling {program_info.name}.{program_info.extension}:")
+        print(f"\nProblem compiling {program.name}.{program.extension}:")
         print(f"{output_object.stderr}")
         exit(0)
     else:
-        print(f"Successfully compiled {program_info.name}.{program_info.extension}")
+        print(f"Successfully compiled {program.name}.{program.extension}")
 
-def run_project_file(in_file: str, program_info: Program):
+def run_program(in_file: str, program: Program):
     # run code
     with open(in_file, "r") as in_filef:
-        output_object = subprocess.run(program_info.run_command, stdin=in_filef, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+        output_object = subprocess.run(program.run_command, stdin=in_filef, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
 
     # handle runtime errors/warnings
     if output_object.returncode != 0:
@@ -65,19 +65,17 @@ def run_project_file(in_file: str, program_info: Program):
         print(f"{output_object.stderr}")
         exit(0)
     else:
-        print(f"Successfully run {program_info.name}.{program_info.extension} with {os.path.basename(in_file)}")
+        print(f"Successfully run {program.name}.{program.extension} with {os.path.basename(in_file)}")
     
     return output_object
 
 def write_to_output_file(actual_out_file: str, output_object: subprocess.CompletedProcess):
-    # write output to actual output files
     with open(actual_out_file, "w") as actfile:
         actual_lines = FileLines(output_object.stdout.splitlines(keepends=True))
         for line in actual_lines.raw:
             actfile.write(line)
 
 def write_to_summary_file(sum_data: SummaryData):  # sourcery skip: ensure-file-closed
-    # write summary of run information
         sumfile = open(sum_data.summary_out_file, "a")
 
         write_summary_header(sum_data.Header)
@@ -137,7 +135,6 @@ def write_line_differences(sum_data: SummaryData) -> None:
         sum_data.isMismatched = 1
         sum_data.sumfile.write(f"Difference in actual and expected output lengths:\n\t\tactual length:    {len(sum_data.actual_lines.split)}\n\t\texpected length:  {len(sum_data.expected_lines.split)}\n\n")
 
-    # write line differences to summary out
     sum_data.sumfile.write("Mismatched lines:\n")
     for (aline, eline) in zip(sum_data.actual_lines.fancy, sum_data.expected_lines.fancy):
         if aline != eline:
@@ -150,11 +147,8 @@ def write_extra_lines(sum_data: SummaryData):
 
     sum_data.extra_lines = len(sum_data.actual_lines.split) - len(sum_data.expected_lines.split)
 
-    # actual is longer
     if len(sum_data.actual_lines.split) > len(sum_data.expected_lines.split): 
         write_extra_actual_lines(sum_data)
-
-    # expected is longer
     else: 
         write_extra_expected_lines(sum_data)
 
@@ -163,7 +157,7 @@ def write_extra_actual_lines(sum_data: SummaryData):
     sum_data.sumfile.write("Extra lines in actual_out:\n")
 
     start = len(sum_data.actual_lines.split) -sum_data.extra_lines
-    stop = len(sum_data.actual_lines.split) # -1?
+    stop = len(sum_data.actual_lines.split)
     for j in range(start, stop): 
         line = sum_data.actual_lines.fancy[j]
         sum_data.sumfile.write(f"\t\t\t\t{line}")
@@ -174,13 +168,12 @@ def write_extra_expected_lines(sum_data: SummaryData):
     sum_data.sumfile.write("Extra lines in expected_out:\n")
 
     start = len(sum_data.expected_lines.split) -sum_data.extra_lines
-    stop = len(sum_data.expected_lines.split) # -1?
+    stop = len(sum_data.expected_lines.split)
     for j in range(start, stop): 
         line = sum_data.expected_lines.fancy[j]
         sum_data.sumfile.write(f"\t\t\t\t{line}")
 
 def write_summary_matching_data(sum_data: SummaryData) -> dict[str,]:
-    # write num of matching lines
     sum_data.mismatched_lines += sum_data.extra_lines
     sum_data.sumfile.write(f"\nMatching lines: ({sum_data.max_lines - sum_data.mismatched_lines}/{sum_data.max_lines})\n")
     sum_data.sumfile.write("-----------------------------------------\n")
@@ -190,6 +183,5 @@ def create_file_wrappers(in_file: str, environment: FileSystemInfo, sum_data: Su
     sum_data.actual_out_file = os.path.join(environment.tests_dir, f"actual_out{sum_data.i}.txt")
     sum_data.expected_out_file = os.path.join(environment.tests_dir, f"expected_out{sum_data.i}.txt")
 
-    # get expected_out_file if it exists
     if sum_data.expected_out_file not in expected_out_files:
         sum_data.expected_out_file = ""

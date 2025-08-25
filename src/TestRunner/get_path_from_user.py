@@ -15,8 +15,8 @@ def get_path_from_user(env: FileSystemInfo):
     """
     file = None
     valid_name_found = False
+    path = False or input("Enter name of file to test: ")
     while not valid_name_found:
-        path = False or input("Enter name of file to test: ")
         potential_matches = file_search(env.cwd, path)
 
         try: 

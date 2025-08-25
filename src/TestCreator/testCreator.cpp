@@ -1,6 +1,4 @@
-// NOTE: Compiling and Running
-// g++ C:/Coding/testingtools/testCreator.cpp -o C:/Coding/testingtools/testCreator.exe
-// C:/Coding/testingtools/testCreator.exe
+
 
 // TODO: Add functionality to include a "Pass" statement in the tests_info file if the user want to make a comment or something 
 
@@ -14,10 +12,7 @@
 using namespace std;
 namespace fs = std::filesystem;
 
-// creates the tests directory
 fs::path createTestsDirectory(fs::path& currentPath) {
-    // NOTE: add more directory names and /'s to create new direcotories. It will nest properly and without any extra work
-    // create the directory.(don't if it already exists)
     fs::path newDirectoryPath = currentPath / "tests"; 
     fs::create_directory(newDirectoryPath);
     std::error_code ec;
@@ -36,24 +31,24 @@ string readIOLines(ifstream& tests_infoFile, string& finalLine, string& line) {
         // handle blank lines
         if (line.empty()) { 
             if (tests_infoFile.eof()) 
-                break; // if end of file is reached, exit loop
+                break;
 
-            continue; // continue consuming blank lines until "INPUT", "OUTPUT", or EOF is reached
+            continue;
         }
 
         if(line == "OUTPUT" || line == "INPUT")
             break;
 
-        if(line.substr(0, 2) == "\\n") // handle newline inputs
+        if(line.substr(0, 2) == "\\n")
             finalLine += "\n";
         else
             finalLine += line + "\n";
 
-        if (tests_infoFile.eof()) // break out of loop if end of file
+        if (tests_infoFile.eof())
             break;
     }
 
-    finalLine.erase(finalLine.size() - 1, 1); // consumes extra newline character
+    finalLine.erase(finalLine.size() - 1, 1); // consume extra newline
     return finalLine;
 }
 
@@ -79,7 +74,6 @@ const int deleteExtraFile(const string& fileName, const fs::path& testsDirPath) 
     fs::path filePath = testsDirPath / fileName;
     int returnCode = 0;
 
-        // remove file
         if (fs::exists(filePath)) {
             try {
                 fs::remove(filePath);
@@ -87,13 +81,12 @@ const int deleteExtraFile(const string& fileName, const fs::path& testsDirPath) 
                 cout << "Error occured trying to delete excess files: \n" << e.what() << endl;
             }
         } else 
-            returnCode = 1; // file not found
+            returnCode = 1;
         
     return returnCode;
 }
 
 int main () {
-    // information to print to tests holders
     vector<string> inputs;
     vector<string> outputs;
     string line;
@@ -102,29 +95,24 @@ int main () {
     int i = 0;
     int numInputs = 0;
     
-    // get to current directory
     fs::path currentPath = fs::current_path();
-
-    // find tests_info.txt in cwd
     fs::path inputFilePath = currentPath / "tests_info.txt";
     ifstream inputFile(inputFilePath);
-
-    // create tests directory
     fs::path testsDirPath = createTestsDirectory(currentPath);
 
     if (inputFile.is_open()) {
-        getline(inputFile, line); // get first line
+        getline(inputFile, line);
         while (1) {
             if (inputFile.eof())
                 break;
 
             if (line.empty()) {
-                getline(inputFile, line); // get next line if blank
+                getline(inputFile, line);
     
                 if (inputFile.eof()) 
-                    break; // if end of file is reached, exit loop
+                    break; 
 
-                continue; // continue consuming blank lines until "INPUT" or "OUTPUT" is reached
+                continue;
             }
             
             if (line == "INPUT") {
@@ -174,9 +162,8 @@ int main () {
 
     // delete extra in files
     while (1) {
-        // specify new input file information
         fileName = "in" + to_string(numInputs) + ".txt";
-        success = deleteExtraFile(fileName, testsDirPath); // delete file
+        success = deleteExtraFile(fileName, testsDirPath);
 
         if (success != 0) // check whether this round of files exists
             break;
