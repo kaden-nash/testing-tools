@@ -1,0 +1,141 @@
+------------------------------------------------------------------------------
+Input from:     			C:\Users\kaden\Koofr\Coding2\testingtools\testing-tools\old_testing_files\testing_files\in0.txt
+Actual output from: 		C:\Users\kaden\Koofr\Coding2\testingtools\testing-tools\old_testing_files\testing_files\actual_out0.txt
+Expected output from:		C:\Users\kaden\Koofr\Coding2\testingtools\testing-tools\old_testing_files\testing_files\expected_out0.txt
+---------------------------------------
+--|0|--
+--|1|--
+--|2|--
+--|3|--
+--|4|--
+--|5|--
+--|6|--
+--|7|--
+--|8|--
+--|9|--
+--|\n|--
+---------------------------------------
+Differences
+---------------------------------------
+Difference in actual and expected output lengths:
+		actual length:    11
+		expected length:  3
+
+Mismatched lines:
+	actual:  	--|0|--
+	expected:	--|esafd|--
+
+	actual:  	--|1|--
+	expected:	--|e1351|--
+
+	actual:  	--|2|--
+	expected:	--|43146gs|--
+
+Extra lines in actual_out:
+				--|3|--
+				--|4|--
+				--|5|--
+				--|6|--
+				--|7|--
+				--|8|--
+				--|9|--
+				--|\n|--
+
+Matching lines: (0/11)
+-----------------------------------------
+                                      | |
+                                      | |
+                                      | |
+                                      | |
+                                      | |
+                                      | |
+                                      | |
+------------------------------------------------------------------------------
+Input from:     			C:\Users\kaden\Koofr\Coding2\testingtools\testing-tools\old_testing_files\testing_files\in1.txt
+Actual output from: 		C:\Users\kaden\Koofr\Coding2\testingtools\testing-tools\old_testing_files\testing_files\actual_out1.txt
+Expected output from:		C:\Users\kaden\Koofr\Coding2\testingtools\testing-tools\old_testing_files\testing_files\expected_out1.txt
+---------------------------------------
+--|0|--
+--|1|--
+--|2|--
+--|3|--
+--|4|--
+--|5|--
+--|6|--
+--|7|--
+--|8|--
+--|9|--
+--|\n|--
+---------------------------------------
+Differences
+---------------------------------------
+Difference in actual and expected output lengths:
+		actual length:    11
+		expected length:  1
+
+Mismatched lines:
+	actual:  	--|0|--
+	expected:	--|eadfeadfeaf|--
+
+Extra lines in actual_out:
+				--|1|--
+				--|2|--
+				--|3|--
+				--|4|--
+				--|5|--
+				--|6|--
+				--|7|--
+				--|8|--
+				--|9|--
+				--|\n|--
+
+Matching lines: (0/11)
+-----------------------------------------
+                                      | |
+                                      | |
+                                      | |
+                                      | |
+                                      | |
+                                      | |
+                                      | |
+------------------------------------------------------------------------------
+Input from:     			C:\Users\kaden\Koofr\Coding2\testingtools\testing-tools\old_testing_files\testing_files\in2.txt
+Actual output from: 		C:\Users\kaden\Koofr\Coding2\testingtools\testing-tools\old_testing_files\testing_files\actual_out2.txt
+Expected output from:		C:\Users\kaden\Koofr\Coding2\testingtools\testing-tools\old_testing_files\testing_files\expected_out2.txt
+---------------------------------------
+--|0|--
+--|1|--
+--|2|--
+--|3|--
+--|4|--
+--|5|--
+--|6|--
+--|7|--
+--|8|--
+--|9|--
+--|\n|--
+---------------------------------------
+Differences
+---------------------------------------
+Difference in actual and expected output lengths:
+		actual length:    11
+		expected length:  1
+
+Mismatched lines:
+	actual:  	--|0|--
+	expected:	--|a|--
+
+Extra lines in actual_out:
+				--|1|--
+				--|2|--
+				--|3|--
+				--|4|--
+				--|5|--
+				--|6|--
+				--|7|--
+				--|8|--
+				--|9|--
+				--|\n|--
+
+Matching lines: (0/11)
+-----------------------------------------
