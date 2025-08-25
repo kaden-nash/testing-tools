@@ -13,23 +13,23 @@ class Program(ABC):
         name - string of file_name without extension
         extension - string of file extension
     """
-    def __init__(self, file):
+    def __init__(self, file: FileName):
         self.name = file.name
         self.extension = file.extension
         self.path = file.path
     
+    @property
     @abstractmethod
-    @property    
     def executable_path(self):
         pass
         
-    @abstractmethod
     @property
+    @abstractmethod
     def run_command(self):
         pass
 
-    @abstractmethod
     @property
+    @abstractmethod
     def compilation_command(self):
         pass
     

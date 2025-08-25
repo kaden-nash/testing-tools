@@ -16,16 +16,16 @@ def main():
     program_factory = ProgramFactory(path)
     program = program_factory.create_program()
 
-    sum_data = SummaryData
+    sum_data = SummaryData()
     sum_data.summary_out_file = os.path.join(environment.tests_dir, "output_summary.txt")
 
-    if not os.path.exists(environment.tests_dir):
-        create_test_files()
+    create_test_files(environment)
 
     in_files = TestFiles("in").files
     expected_out_files = TestFiles("expected_out").files
 
-    compile_program(program)
+    if program.compilation_command != None:
+        compile_program(program)
 
     # clear previous data in output_summary.txt
     with open(sum_data.summary_out_file, "w"):
@@ -34,7 +34,7 @@ def main():
     for in_file in in_files:
         create_file_wrappers(in_file, environment, sum_data, expected_out_files)
 
-        sum_data.output_object = run_program(sum_data)
+        sum_data.output_object = run_program(in_file, program)
 
         write_to_output_file(sum_data)
 

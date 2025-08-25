@@ -15,7 +15,7 @@ class CProgram(Program):
     @property    
     def executable_path(self):
         # if get_shell_type() == "powershell":
-        return f"{self.path[:-len(self.extension)]}.exe"
+        return f"{self.path[:-len(self.extension)]}exe"
         # elif get_shell_type() == "bash":
         #     self.executable = self.name + ".out"
 

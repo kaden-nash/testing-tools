@@ -14,7 +14,7 @@ class JavaProgram(Program):
     
     @property
     def executable_path(self):
-        return f"{self.path[:-len(self.extension)]}.class"
+        return f"{self.path[:-len(self.extension)]}class"
     
     @property
     def run_command(self):
