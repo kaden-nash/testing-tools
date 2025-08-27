@@ -3,7 +3,6 @@ import os
 from src.TestRunner.ProgramFactory import ProgramFactory
 from src.TestRunner.get_path_from_user import get_path_from_user
 from src.TestRunner.FileSystemInfo import FileSystemInfo
-from src.TestRunner.TestFiles import TestFiles
 from src.TestRunner.MainHelpers import *
 
 def main():
@@ -21,8 +20,8 @@ def main():
 
     create_test_files(environment)
 
-    in_files = TestFiles("in").files
-    expected_out_files = TestFiles("expected_out").files
+    in_files = file_search(environment.tests_dir, "in")
+    expected_out_files = file_search(environment.tests_dir, "expected_out")
 
     if program.compilation_command != None:
         compile_program(program)
