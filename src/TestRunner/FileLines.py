@@ -5,23 +5,29 @@ class FileLines():
     Class that takes in and manipulates raw lines from a file.
 
     Attributes:
-        raw - list of the lines passed in
-        split - list of lines and newlines separated
-        fancy - list of lines and newlines viable for printing to another file
+        raw: list - Original lines passed in from file
+        split: list - Lines and newlines separated for processing
+        fancy: list - Lines formatted with delimiters for comparison output
     """
     def __init__(self, raw):
+        """
+        Initialize with raw file lines.
+        
+        Input:
+            raw: list of strings - Raw lines from file (with line endings)
+        """
         self.raw = raw
     
     @property
     def split(self):  # sourcery skip: use-getitem-for-re-match-groups
         """
-        Parses program output, reordering newlines for more readability
+        Parses program output, separating content from newlines for readability.
 
         Input:
-            raw lines from a file (with ends)
+            Uses self.raw - list of raw lines from file (with line endings)
 
         Output:
-            list of string lines and string newlines separated
+            list of strings - Lines and newlines as separate elements
         """
 
         final_lines = []
@@ -44,13 +50,13 @@ class FileLines():
     @property
     def fancy(self):  # sourcery skip: assign-if-exp
         """
-        Formats lines for comparsion printing
+        Formats lines with delimiters for comparison printing.
 
         Input:
-            a line (string)
+            Uses self.split - list of separated lines and newlines
 
         Output:
-            the string to print to summary_out.txt
+            list of strings - Lines formatted with --|content|-- delimiters
         """
         final_lines = []
         final_line = ""

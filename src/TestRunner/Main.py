@@ -7,9 +7,18 @@ from src.TestRunner.MainHelpers import *
 
 def main():
     """
-    Drives script
+    Drives the automated testing process for programs.
+    
+    Workflow:
+    1. Get program file from user
+    2. Create program object and test environment
+    3. Compile program if needed
+    4. Run tests against input files
+    5. Compare outputs with expected results
+    6. Generate summary report
     """
 
+    # Setup environment and get program to test
     environment = FileSystemInfo()
     path = get_path_from_user(environment)
     program_factory = ProgramFactory(path)

@@ -2,13 +2,14 @@ import os
 
 def file_search(root_dir, searchTerm):
         """
-        Searches for a file 
+        Searches for files containing a term in their filename.
 
         Input:
-            absolute directory path to begin searching through, a string term to search for
+            root_dir: str - absolute directory path to begin searching through
+            searchTerm: str - string term to search for in filenames
 
         Output:
-            list of all files from root_dir and lower containing the search_term in their names
+            list of str - absolute paths of all files containing searchTerm in their names
         """
         matches = []
         for dirpath, dirnames, filenames in os.walk(root_dir):
