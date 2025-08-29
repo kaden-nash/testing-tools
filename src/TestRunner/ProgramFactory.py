@@ -1,3 +1,5 @@
+import sys
+
 from src.TestRunner.Program import Program
 from src.TestRunner.CProgram import CProgram
 from src.TestRunner.JavaProgram import JavaProgram
@@ -40,4 +42,4 @@ class ProgramFactory():
             return self.supported_languages[self.file.extension](self.file)
 
         print(f"Unsupported file: \"{self.file.extension}\" - terminating.")
-        exit(0)
+        sys.exit(0)

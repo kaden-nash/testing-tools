@@ -1,4 +1,5 @@
 import string
+import sys
 
 from src.TestRunner.file_search import file_search
 from src.TestRunner.FileFoundOverload import FileFoundOverload
@@ -40,7 +41,7 @@ def _ask_user_again(input_message: str) -> str:
     user_choice = input(input_message)
     if user_choice in "Cc":
         print("Exiting program.")
-        exit(0)
+        sys.exit(0)
     return user_choice
 
 def _isolate_file(matches):
@@ -99,7 +100,7 @@ def _get_user_index() -> int:
 
         # exit if user cancelled
         if match_index in "Cc":
-            exit(0)
+            sys.exit(0)
 
         # try again
         if invalid_input:

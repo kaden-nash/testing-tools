@@ -1,5 +1,5 @@
 # written by Qodo Gen
-
+import sys
 import pytest
 from unittest.mock import Mock, patch, mock_open, MagicMock
 import os
@@ -218,8 +218,8 @@ def test_main_handles_compilation_failure(
     
     mock_test_files.side_effect = [mock_in_files, mock_expected_files]
     
-    # Make compile_program raise SystemExit (simulating exit(0) call)
-    mock_compile_program.side_effect = SystemExit(0)
+    # Make compile_program raise SystemExit (simulating sys.exit(0) call)
+    mock_compile_program.side_effect = sys.exit(0)
     
     # Execute and verify SystemExit is raised
     with pytest.raises(SystemExit):

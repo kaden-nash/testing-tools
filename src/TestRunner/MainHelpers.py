@@ -32,7 +32,7 @@ def create_test_files(environment: FileSystemInfo):
     if output_object.returncode != 0:
         print(f"\nProblem running testCreator.exe:")
         print(f"{output_object.stderr}")
-        exit(0)
+        sys.exit(0)
     else:
         print(f"\nSuccessfully run testCreator.exe")
 
@@ -93,7 +93,7 @@ def compile_program(program: Program):
     if output_object.returncode != 0:
         print(f"\nProblem compiling {program.name}.{program.extension}:")
         print(f"{output_object.stderr}")
-        exit(0)
+        sys.exit(0)
     else:
         print(f"Successfully compiled {program.name}.{program.extension}")
 
@@ -117,7 +117,7 @@ def run_program(in_file: str, program: Program):
     if output_object.returncode != 0:
         print(f"\nProblem running {os.path.basename(in_file)}:")
         print(f"{output_object.stderr}")
-        exit(0)
+        sys.exit(0)
     else:
         print(f"Successfully run {program.name}.{program.extension} with {os.path.basename(in_file)}")
     
