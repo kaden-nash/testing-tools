@@ -50,7 +50,7 @@ def find_test_creator() -> str:
     executable_path = os.path.join(project_root, 'TestCreator', 'testCreator.exe')
 
     if getattr(sys, 'frozen', False):
-        executable_path = os.path.join(sys._MEIPASS, "testCreator.exe") # running in a PyInstaller bundle
+        executable_path = os.path.join(sys._MEIPASS, "TestCreator", "testCreator.exe") # running in a PyInstaller bundle
     
     return executable_path
 
