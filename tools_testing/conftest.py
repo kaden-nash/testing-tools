@@ -14,4 +14,5 @@ def get_matches() -> list:
         "D:\\Testing-Tools\\testing-tools\\src\\TestRunner\\JavaProgram.py",
         "D:\\Testing-Tools\\testing-tools\\src\\TestRunner\\Main.py",
         "D:\\Testing-Tools\\testing-tools\\src\\TestRunner\\MainHelpers.py",
+        "D:\\Testing-Tools\\testing-tools\\src\\TestRunner\\Program.py",
     ]

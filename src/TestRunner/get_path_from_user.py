@@ -61,7 +61,7 @@ def _isolate_file(matches):
         raise FileNotFoundError("The specified file could not be found. Please ensure you are in the right cwd.")
     elif len(matches) == 1:
         match = matches[0]
-    elif len(matches) == MAX_RESULTS + 1:
+    elif len(matches) > MAX_RESULTS:
         raise FileFoundOverload("9+ files were found matching. Please ensure you are in the right cwd.")
     else:
         correctIndex = _get_user_match_selection(matches) - 1
