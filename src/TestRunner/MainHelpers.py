@@ -1,4 +1,5 @@
 import os
+import sys
 import subprocess
 from src.TestRunner.FileLines import FileLines
 from src.TestRunner.Program import Program
@@ -46,7 +47,12 @@ def find_test_creator() -> str:
     """
     script_dir = os.path.dirname(os.path.abspath(__file__))
     project_root = os.path.dirname(script_dir)
-    return os.path.join(project_root, 'TestCreator', 'testCreator.exe')
+    executable_path = os.path.join(project_root, 'TestCreator', 'testCreator.exe')
+
+    if getattr(sys, 'frozen', False):
+        executable_path = os.path.join(sys._MEIPASS, "testCreator.exe") # running in a PyInstaller bundle
+    
+    return executable_path
 
 class SummaryData:
     """Data container for test execution summary information.
