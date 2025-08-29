@@ -1,4 +1,12 @@
 import os
+import sys
+
+def setup_path():
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    project_root = os.path.abspath(os.path.join(script_dir, os.pardir, os.pardir))
+    sys.path.insert(0, project_root)
+
+setup_path()
 
 from src.TestRunner.ProgramFactory import ProgramFactory
 from src.TestRunner.get_path_from_user import get_path_from_user
